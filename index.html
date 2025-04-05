@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avadhesh Kirana Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #fdfcfb, #e2d1c3, #d3cce3, #e9e4f0);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #0077b6;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    #searchBar {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: #90e0ef;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0077b6;
+    }
+
+    /* Language switcher button style */
+    #language-selector {
+      padding: 8px 15px;
+      border-radius: 6px;
+      background-color: #90e0ef;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    #language-selector:hover {
+      background-color: #0077b6;
+    }
+
+    /* Navbar styles */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #0077b6;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 25px;
+      font-size: 1.2em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav a:hover {
+      color: #90e0ef;
+    }
+
+    nav i {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+    }
+
+    /* Product section */
+    .product-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      background: #f1f1f1;
+    }
+
+    .product {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product h3 {
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+
+    /* Filter and category section */
+    .filter-buttons {
+      padding: 10px 20px;
+      text-align: center;
+      background: #caf0f8;
+    }
+
+    .filter-buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      background-color: #0077b6;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Cart Modal UI */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cart-modal ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-modal h2 {
+      font-size: 1.6em;
+    }
+
+    .cart-modal button {
+      padding: 10px 15px;
+      border-radius: 6px;
+      background-color: #0077b6;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Footer styles */
+    footer {
+      text-align: center;
+      background-color: #0077b6;
+      padding: 20px;
+      color: white;
+    }
+
+    footer p {
+      margin: 5px;
+      font-size: 1em;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Header with cart counter and search bar -->
+  <header>
+    <h1 id="store-name">🛍️ Avadhesh Kirana Store</h1>
+    <div class="header-icons">
+      <input type="text" id="searchBar" placeholder="🔎 Search products..." oninput="filterProducts()">
+      <button onclick="toggleCartModal()">🛒 Cart (<span id="cart-counter">0</span>)</button>
+      <!-- Language Switcher -->
+      <select id="language-selector" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Navbar with icons and proper spacing -->
+  <nav>
+    <a href="home.html"><i class="fas fa-home"></i> <span class="nav-text-en">Home</span><span class="nav-text-hi" style="display:none;">घर</span></a>
+    <a href="index.html"><i class="fas fa-box"></i> <span class="nav-text-en">Products</span><span class="nav-text-hi" style="display:none;">उत्पाद</span></a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> <span class="nav-text-en">About</span><span class="nav-text-hi" style="display:none;">हमारे बारे में</span></a>
+    <a href="contact.html"><i class="fas fa-phone"></i> <span class="nav-text-en">Contact</span><span class="nav-text-hi" style="display:none;">संपर्क करें</span></a>
+  </nav>
+
+  <!-- Filter buttons -->
+  <div class="filter-buttons">
+    <button onclick="filterCategory('all')">📦 All</button>
+    <button onclick="filterCategory('grains')">🌾 Grains</button>
+    <button onclick="filterCategory('spices')">🌶️ Spices</button>
+    <button onclick="filterCategory('snacks')">🍪 Snacks</button>
+    <button onclick="filterCategory('drinks')">🥤 Drinks</button>
+    <button onclick="filterCategory('household')">🧽 Household</button>
+  </div>
+
+  <!-- Product cards (50 products added) -->
+  <div id="product-container" class="product-container">
+    <!-- Example of products, add similar code for remaining 50 products -->
+    <div class="product" data-category="grains" id="product-1">
+      <img src="https://pin.it/2tKNC4kwI" alt="Basmati Rice">
+      <h3 class="product-name-en"> Basmati Rice</h3>
+      <h3 class="product-name-hi" style="display:none;"> बासमती चावल</h3>
+      <p class="product-description-en">₹90/kg</p>
+      <p class="product-description-hi" style="display:none;">₹90/किग्रा</p>
+      <button onclick="addToCart('Basmati Rice', 90)">➕ Add to Cart</button>
+
+    </div>
+
+    <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en"> Masala Mix</h3>
+      <h3 class="product-name-hi" style="display:none;"> मसाला मिश्रण</h3>
+      <p class="product-description-en">₹10</p>
+      <p class="product-description-hi" style="display:none;">₹10</p>
+      <button onclick="addToCart('Masala Mix', 10)">➕ Add to Cart</button>
+
+
+    </div>
+     <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Wheat</h3>
+      <h3 class="product-name-hi" style="display:none;">गेंहूँ </h3>
+      <p class="product-description-en">₹25</p>
+      <p class="product-description-hi" style="display:none;">₹25</p>
+      <button onclick="addToCart('Masala Mix', 25)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Almond</h3>
+      <h3 class="product-name-hi" style="display:none;">बादाम</h3>
+      <p class="product-description-en">₹100</p>
+      <p class="product-description-hi" style="display:none;">₹100</p>
+      <button onclick="addToCart('Masala Mix', 100)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Brush</h3>
+      <h3 class="product-name-hi" style="display:none;"> ब्रश</h3>
+      <p class="product-description-en">₹10</p>
+      <p class="product-description-hi" style="display:none;">₹10</p>
+      <button onclick="addToCart('Masala Mix', 10)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">ToothPaste</h3>
+      <h3 class="product-name-hi" style="display:none;">टूथपेस्ट</h3>
+      <p class="product-description-en">₹10</p>
+      <p class="product-description-hi" style="display:none;">₹10</p>
+      <button onclick="addToCart('Masala Mix', 10)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Detergent Powder</h3>
+      <h3 class="product-name-hi" style="display:none;">डिटर्जेंट पाउडर</h3>
+      <p class="product-description-en">₹50</p>
+      <p class="product-description-hi" style="display:none;">₹50</p>
+      <button onclick="addToCart('Masala Mix', 50)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Refiend Oil</h3>
+      <h3 class="product-name-hi" style="display:none;">शुद्ध तेल</h3>
+      <p class="product-description-en">₹110</p>
+      <p class="product-description-hi" style="display:none;">₹110</p>
+      <button onclick="addToCart('Masala Mix', 110)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Coconut Oil</h3>
+      <h3 class="product-name-hi" style="display:none;">नारियल का तेल</h3>
+      <p class="product-description-en">₹20</p>
+      <p class="product-description-hi" style="display:none;">₹20</p>
+      <button onclick="addToCart('Masala Mix', 20)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Biscuits</h3>
+      <h3 class="product-name-hi" style="display:none;">बिस्कुट</h3>
+      <p class="product-description-en">₹5</p>
+      <p class="product-description-hi" style="display:none;">₹5</p>
+      <button onclick="addToCart('Masala Mix', 5)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Namkeen</h3>
+      <h3 class="product-name-hi" style="display:none;">नमकीन</h3>
+      <p class="product-description-en">₹30</p>
+      <p class="product-description-hi" style="display:none;">₹30</p>
+      <button onclick="addToCart('Masala Mix', 30)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Bath Soap</h3>
+      <h3 class="product-name-hi" style="display:none;">साबुन</h3>
+      <p class="product-description-en">₹10</p>
+      <p class="product-description-hi" style="display:none;">₹10</p>
+      <button onclick="addToCart('Masala Mix', 10)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Shampoo</h3>
+      <h3 class="product-name-hi" style="display:none;">शैम्पू</h3>
+      <p class="product-description-en">₹1</p>
+      <p class="product-description-hi" style="display:none;">₹1</p>
+      <button onclick="addToCart('Masala Mix', 1)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Daal</h3>
+      <h3 class="product-name-hi" style="display:none;">दाल</h3>
+      <p class="product-description-en">₹100</p>
+      <p class="product-description-hi" style="display:none;">₹100</p>
+      <button onclick="addToCart('Masala Mix', 100)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Rice</h3>
+      <h3 class="product-name-hi" style="display:none;">🌶️ मसाला मिश्रण</h3>
+      <p class="product-description-en">₹25</p>
+      <p class="product-description-hi" style="display:none;">₹25</p>
+      <button onclick="addToCart('Masala Mix', 25)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">AgarWood</h3>
+      <h3 class="product-name-hi" style="display:none;">अगरबत्ती</h3>
+      <p class="product-description-en">₹10</p>
+      <p class="product-description-hi" style="display:none;">₹10</p>
+      <button onclick="addToCart('Masala Mix', 10)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Hawan Samagri</h3>
+      <h3 class="product-name-hi" style="display:none;">हवन सामग्री</h3>
+      <p class="product-description-en">₹50</p>
+      <p class="product-description-hi" style="display:none;">₹50</p>
+      <button onclick="addToCart('Masala Mix', 50)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Baking Powder</h3>
+      <h3 class="product-name-hi" style="display:none;">बेकिंग पाउडर</h3>
+      <p class="product-description-en">₹30</p>
+      <p class="product-description-hi" style="display:none;">₹30</p>
+      <button onclick="addToCart('Masala Mix', 30)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Besan</h3>
+      <h3 class="product-name-hi" style="display:none;">बेसन</h3>
+      <p class="product-description-en">₹70</p>
+      <p class="product-description-hi" style="display:none;">₹70</p>
+      <button onclick="addToCart('Masala Mix', 70)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Flour</h3>
+      <h3 class="product-name-hi" style="display:none;">आटा</h3>
+      <p class="product-description-en">₹25</p>
+      <p class="product-description-hi" style="display:none;">₹25</p>
+      <button onclick="addToCart('Masala Mix', 25)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Mustard  Oil</h3>
+      <h3 class="product-name-hi" style="display:none;">सरसों का तेल</h3>
+      <p class="product-description-en">₹80</p>
+      <p class="product-description-hi" style="display:none;">₹80</p>
+      <button onclick="addToCart('Masala Mix', 80)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Tea</h3>
+      <h3 class="product-name-hi" style="display:none;">चाय</h3>
+      <p class="product-description-en">₹10</p>
+      <p class="product-description-hi" style="display:none;">₹10</p>
+      <button onclick="addToCart('Masala Mix', 10)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Sugar</h3>
+      <h3 class="product-name-hi" style="display:none;">चीनी</h3>
+      <p class="product-description-en">₹39</p>
+      <p class="product-description-hi" style="display:none;">₹39</p>
+      <button onclick="addToCart('Masala Mix', 39)">➕ Add to Cart</button>
+
+
+    </div>
+     <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Gaggery</h3>
+      <h3 class="product-name-hi" style="display:none;">गुड़</h3>
+      <p class="product-description-en">₹50</p>
+      <p class="product-description-hi" style="display:none;">₹50</p>
+      <button onclick="addToCart('Masala Mix', 50)">➕ Add to Cart</button>
+
+
+    </div> <div class="product" data-category="spices" id="product-2">
+      <img src="https://source.unsplash.com/featured/?spices" alt="Masala Mix">
+      <h3 class="product-name-en">Cow Feed</h3>
+      <h3 class="product-name-hi" style="display:none;">गाय का चारा</h3>
+      <p class="product-description-en">₹22</p>
+      <p class="product-description-hi" style="display:none;">₹22</p>
+      <button onclick="addToCart('Masala Mix', 25)">➕ Add to Cart</button>
+    
+
+    <!-- Add remaining 48 products here similarly -->
+
+  </div>
+
+  <!-- Cart Modal UI -->
+  <div id="cart-modal" class="cart-modal">
+    <h2>🛒 Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <h3>Total: ₹<span id="cart-total">0</span></h3>
+    <button onclick="checkoutCart()">✅ Checkout</button>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Avadhesh Kirana Store. All Rights Reserved.</p>
+    <p>Made with ❤️ by your friendly neighborhood grocer.</p>
+  </footer>
+
+  <script>
+    const cart = {};
+
+    function addToCart(product, price) {
+      if (cart[product]) {
+        cart[product].qty += 1;
+      } else {
+        cart[product] = { price, qty: 1 };
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const itemsContainer = document.getElementById('cart-items');
+      const totalElement = document.getElementById('cart-total');
+      const counter = document.getElementById('cart-counter');
+      itemsContainer.innerHTML = '';
+      let total = 0;
+      let count = 0;
+      for (let item in cart) {
+        const { price, qty } = cart[item];
+        total += price * qty;
+        count += qty;
+        itemsContainer.innerHTML += `<li>${item} × ${qty} = ₹${price * qty}</li>`;
+      }
+      totalElement.textContent = total;
+      counter.textContent = count;
+    }
+
+    function toggleCartModal() {
+      const modal = document.getElementById('cart-modal');
+      modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function checkoutCart() {
+      alert('🛍️ Order placed! Thank you for shopping.');
+    }
+
+    function filterCategory(category) {
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+
+    function filterProducts() {
+      const term = document.getElementById('searchBar').value.toLowerCase();
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        const name = product.querySelector('.product-name-en').innerText.toLowerCase();
+        product.style.display = name.includes(term) ? 'block' : 'none';
+      });
+    }
+
+    function changeLanguage() {
+      const language = document.getElementById('language-selector').value;
+      const storeName = document.getElementById('store-name');
+      const productNamesEn = document.querySelectorAll('.product-name-en');
+      const productNamesHi = document.querySelectorAll('.product-name-hi');
+      const productDescriptionsEn = document.querySelectorAll('.product-description-en');
+      const productDescriptionsHi = document.querySelectorAll('.product-description-hi');
+      const navTextsEn = document.querySelectorAll('.nav-text-en');
+      const navTextsHi = document.querySelectorAll('.nav-text-hi');
+
+      // Change store name
+      storeName.textContent = language === 'hi' ? '🛍️ अवधेश किराना स्टोर' : '🛍️ Avadhesh Kirana Store';
+
+      // Toggle product names and descriptions
+      productNamesEn.forEach(product => product.style.display = language === 'hi' ? 'none' : 'block');
+      productNamesHi.forEach(product => product.style.display = language === 'hi' ? 'block' : 'none');
+      productDescriptionsEn.forEach(product => product.style.display = language === 'hi' ? 'none' : 'block');
+      productDescriptionsHi.forEach(product => product.style.display = language === 'hi' ? 'block' : 'none');
+
+      // Toggle navbar text
+      navTextsEn.forEach(nav => nav.style.display = language === 'hi' ? 'none' : 'block');
+      navTextsHi.forEach(nav => nav.style.display = language === 'hi' ? 'block' : 'none');
+    }
+  </script>
+</body>
+</html>

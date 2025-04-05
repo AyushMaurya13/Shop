@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avadhesh Kirana Store - Home</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #fdfcfb, #e2d1c3, #d3cce3, #e9e4f0);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Navbar Styles */
+    nav {
+      background-color: #0077b6;
+      color: white;
+      padding: 15px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-right: 20px;
+    }
+
+    nav .menu {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    nav .menu a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.1em;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    nav .menu a:hover {
+      background-color: #005f8f;
+    }
+
+    nav .menu a.active {
+      background-color: #004c72;
+    }
+
+    /* Language Switcher */
+    .language-switcher {
+      margin-left: 20px;
+      padding: 5px 10px;
+      background-color: #90e0ef;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1em;
+    }
+
+    .language-switcher:hover {
+      background-color: #0077b6;
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 80px; /* Adjust to avoid navbar overlap */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #5f2c82, #49a09d);
+      color: white;
+      height: 350px;
+    }
+
+    .hero .content {
+      max-width: 600px;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+    }
+
+    .hero .cta-btn {
+      background: #ff9f00;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .hero .cta-btn:hover {
+      background-color: #ff7a00;
+    }
+
+    /* Featured categories section */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 50px 20px;
+    }
+
+    .category {
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .category:hover {
+      transform: scale(1.05);
+    }
+
+    .category i {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .category h3 {
+      font-size: 1.5em;
+    }
+
+    /* Footer */
+    footer {
+      padding: 30px 20px;
+      background-color: #0077b6;
+      color: white;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 1.1em;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 50px 20px;
+    }
+
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    section p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    /* About Section Styles */
+    .about {
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 10px;
+      font-size: 1.1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    .contact-form button {
+      padding: 12px;
+      font-size: 1.2em;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background-color: #005f8f;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar Section -->
+  <nav>
+    <div class="logo" id="store-name">🛍️ Avadhesh Kirana Store</div>
+    <div class="menu">
+      <a href="home.html" class="active" id="home-link">Home</a>
+      <a href="index.html" id="products-link">Products</a>
+      <a href="about.html" id="about-link">About</a>
+      <a href="contact.html" id="contact-link">Contact</a>
+    </div>
+    <!-- Language Switcher -->
+    <button class="language-switcher" id="language-switcher" onclick="changeLanguage('hi')">हिंदी</button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="content">
+      <h2 id="hero-title">Welcome to Avadhesh Kirana Store</h2>
+      <p id="hero-description">Your one-stop shop for all essential groceries and more!</p>
+      <button class="cta-btn" onclick="window.location.href='#products'"><a href="products.html">Shop Now</a></button>
+    </div>
+    <div class="image">
+      <img src="" alt="Grocery items" style="width: 100%; border-radius: 8px;">
+    </div>
+  </section>
+
+  <!-- Featured Categories Section -->
+  <section class="categories" id="products">
+    <div class="category" id="category-grains">
+      <i class="fas fa-cereal-box"></i>
+      <h3>Grains</h3>
+      <p>Rice, wheat, pulses, and more.</p>
+    </div>
+    <div class="category" id="category-spices">
+      <i class="fas fa-pepper-hot"></i>
+      <h3>Spices</h3>
+      <p>Herbs, spices, and masalas.</p>
+    </div>
+    <div class="category" id="category-snacks">
+      <i class="fas fa-cookie-bite"></i>
+      <h3>Snacks</h3>
+      <p>Chips, cookies, and treats.</p>
+    </div>
+    <div class="category" id="category-drinks">
+      <i class="fas fa-wine-bottle"></i>
+      <h3>Drinks</h3>
+      <p>Juices, soft drinks, and beverages.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h2>About Us</h2>
+    <p>Avadhesh Kirana Store is committed to providing the highest quality groceries and everyday essentials. We take pride in offering fresh and affordable products to our customers. Whether you're looking for grains, spices, snacks, or drinks, we have it all!</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Avadhesh Kirana Store. All Rights Reserved.</p>
+    <p>Made with ❤️ by your friendly neighborhood grocer.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        storeName: "🛍️ Avadhesh Kirana Store",
+        homeLink: "Home",
+        productsLink: "Products",
+        aboutLink: "About",
+        contactLink: "Contact",
+        heroTitle: "Welcome to Avadhesh Kirana Store",
+        heroDescription: "Your one-stop shop for all essential groceries and more!",
+        categoryGrains: "Grains",
+        categorySpices: "Spices",
+        categorySnacks: "Snacks",
+        categoryDrinks: "Drinks",
+        aboutUs: "About Us",
+        contactUs: "Contact Us",
+        sendMessage: "Send Message"
+      },
+      hi: {
+        storeName: "🛍️ अवधेश किराना स्टोर",
+        homeLink: "होम",
+        productsLink: "उत्पाद",
+        aboutLink: "हमारे बारे में",
+        contactLink: "संपर्क करें",
+        heroTitle: "स्वागत है अवधेश किराना स्टोर में",
+        heroDescription: "सभी आवश्यक किराने का सामान और अधिक के लिए आपकी एकमात्र दुकान!",
+        categoryGrains: "अनाज",
+        categorySpices: "मसाले",
+        categorySnacks: "नाश्ता",
+        categoryDrinks: "पेय",
+        aboutUs: "हमारे बारे में",
+        contactUs: "संपर्क करें",
+        sendMessage: "संदेश भेजें"
+      }
+    };
+
+    function changeLanguage(lang) {
+      const text = translations[lang];
+
+      document.getElementById("store-name").textContent = text.storeName;
+      document.getElementById("home-link").textContent = text.homeLink;
+      document.getElementById("products-link").textContent = text.productsLink;
+      document.getElementById("about-link").textContent = text.aboutLink;
+      document.getElementById("contact-link").textContent = text.contactLink;
+
+      document.getElementById("hero-title").textContent = text.heroTitle;
+      document.getElementById("hero-description").textContent = text.heroDescription;
+
+      document.getElementById("category-grains").querySelector("h3").textContent = text.categoryGrains;
+      document.getElementById("category-spices").querySelector("h3").textContent = text.categorySpices;
+      document.getElementById("category-snacks").querySelector("h3").textContent = text.categorySnacks;
+      document.getElementById("category-drinks").querySelector("h3").textContent = text.categoryDrinks;
+
+      document.getElementById("about").querySelector("h2").textContent = text.aboutUs;
+      document.getElementById("contact").querySelector("h2").textContent = text.contactUs;
+      document.querySelector(".contact-form button").textContent = text.sendMessage;
+
+      // Change button text to the other language
+      const switcher = document.getElementById('language-switcher');
+      switcher.textContent = lang === 'en' ? 'हिंदी' : 'English';
+      switcher.setAttribute('onclick', `changeLanguage('${lang === 'en' ? 'hi' : 'en'}')`);
+    }
+  </script>
+
+</body>
+</html>

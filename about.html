@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Avadhesh Kirana Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #fdfcfb, #e2d1c3, #d3cce3, #e9e4f0);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #0077b6;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    button {
+      background: #90e0ef;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0077b6;
+    }
+
+    /* Navbar styles */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #0077b6;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 25px;
+      font-size: 1.2em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav a:hover {
+      color: #90e0ef;
+    }
+
+    nav i {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+    }
+
+    /* About Section */
+    .about-container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .about-container h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #0077b6;
+    }
+
+    .about-container p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #0077b6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: #90e0ef;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* Language switcher styles */
+    #language-selector {
+      padding: 8px 15px;
+      border-radius: 6px;
+      background-color: #90e0ef;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    #language-selector:hover {
+      background-color: #0077b6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header with language switcher -->
+  <header>
+    <h1 id="store-name">🛍️ Avadhesh Kirana Store</h1>
+    <div class="header-icons">
+      <!-- Language Switcher -->
+      <select id="language-selector" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Navbar with links -->
+  <nav>
+    <a href="home.html"><i class="fas fa-home"></i> <span class="nav-text-en">Home</span><span class="nav-text-hi" style="display:none;">घर</span></a>
+    <a href="index.html"><i class="fas fa-box"></i> <span class="nav-text-en">Products</span><span class="nav-text-hi" style="display:none;">उत्पाद</span></a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> <span class="nav-text-en">About</span><span class="nav-text-hi" style="display:none;">हमारे बारे में</span></a>
+    <a href="contact.html"><i class="fas fa-phone"></i> <span class="nav-text-en">Contact</span><span class="nav-text-hi" style="display:none;">संपर्क करें</span></a>
+  </nav>
+
+  <!-- About Section -->
+  <div class="about-container">
+    <h2>About Avadhesh Kirana Store</h2>
+    <p class="about-text-en">Welcome to Avadhesh Kirana Store, your one-stop destination for all your daily grocery needs. We are committed to providing high-quality products at affordable prices. Whether you're looking for grains, spices, snacks, or household essentials, we have something for everyone.</p>
+    <p class="about-text-hi" style="display:none;">अवधेश किराना स्टोर में आपका स्वागत है, जो आपकी सभी दैनिक किराने की जरूरतों के लिए एक स्थान है। हम उच्च गुणवत्ता वाले उत्पादों को किफायती दामों पर प्रदान करने के लिए प्रतिबद्ध हैं। चाहे आप अनाज, मसाले, नाश्ते या घरेलू सामान की तलाश कर रहे हों, हमारे पास हर किसी के लिए कुछ न कुछ है।</p>
+    <p class="about-text-en">Our store is designed to provide you with a seamless shopping experience, complete with a simple and efficient shopping cart, easy product navigation, and a user-friendly interface. We strive to bring you the best shopping experience, both online and offline.</p>
+    <p class="about-text-hi" style="display:none;">हमारा स्टोर आपको एक सहज खरीदारी अनुभव प्रदान करने के लिए डिज़ाइन किया गया है, जिसमें एक सरल और कुशल शॉपिंग कार्ट, आसान उत्पाद नेविगेशन और उपयोगकर्ता के अनुकूल इंटरफेस शामिल है। हम आपको सर्वोत्तम शॉपिंग अनुभव प्रदान करने के लिए ऑनलाइन और ऑफलाइन दोनों में प्रयासरत हैं।</p>
+    <p class="about-text-en">Thank you for choosing Avadhesh Kirana Store. We look forward to serving you!</p>
+    <p class="about-text-hi" style="display:none;">अवधेश किराना स्टोर को चुनने के लिए धन्यवाद। हमें आपकी सेवा करने का इंतजार है!</p>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© 2025 Avadhesh Kirana Store | All Rights Reserved</p>
+    <p>Follow us on <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
+  </footer>
+
+  <script>
+    function changeLanguage() {
+      const language = document.getElementById('language-selector').value;
+      const storeName = document.getElementById('store-name');
+      const aboutTextEn = document.querySelectorAll('.about-text-en');
+      const aboutTextHi = document.querySelectorAll('.about-text-hi');
+      const navTextsEn = document.querySelectorAll('.nav-text-en');
+      const navTextsHi = document.querySelectorAll('.nav-text-hi');
+
+      // Change store name
+      storeName.textContent = language === 'hi' ? '🛍️ अवधेश किराना स्टोर' : '🛍️ Avadhesh Kirana Store';
+
+      // Toggle about section text
+      aboutTextEn.forEach(text => text.style.display = language === 'hi' ? 'none' : 'block');
+      aboutTextHi.forEach(text => text.style.display = language === 'hi' ? 'block' : 'none');
+
+      // Toggle navbar text
+      navTextsEn.forEach(nav => nav.style.display = language === 'hi' ? 'none' : 'block');
+      navTextsHi.forEach(nav => nav.style.display = language === 'hi' ? 'block' : 'none');
+    }
+  </script>
+
+</body>
+</html>
